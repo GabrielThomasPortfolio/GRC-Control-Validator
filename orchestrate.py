@@ -157,8 +157,20 @@ def generate_markdown_executive_summary(final_report):
         
         if item.get("verification_checklist"):
             md.append("#### Checked Auditing Verifications:")
-            for check in item["verification_checklist"]:
-                md.append(f"- [x] {check}")
+            
+            raw_checklist = item["verification_checklist"]
+            
+            # Type-Guard: If the database returned a raw string sentence instead of a list, wrap it safely
+            if isinstance(raw_checklist, str):
+                checklist_items = [raw_checklist]
+            elif isinstance(raw_checklist, list):
+                checklist_items = raw_checklist
+            else:
+                checklist_items = [str(raw_checklist)]
+                
+            for check in checklist_items:
+                # Ensure we strip out any stray trailing newlines from the database string
+                md.append(f"- [x] {check.strip()}")
             md.append("")
             
         if item.get("remediation_directives") and item["compliance_status"] != "COMPLIANT":
