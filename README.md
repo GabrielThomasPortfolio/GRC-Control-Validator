@@ -1,5 +1,5 @@
-```markdown
 # 🛡️ AI Policy Evaluation & Compliance Engine
+
 ### *Enterprise-Grade Local RAG Pipeline & Advanced Application Security Boundary*
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://policy-evaluation-engine-gabrielthomas.streamlit.app/)
@@ -22,7 +22,6 @@ This project delivers an automated **AI Governance & Policy Evaluation Engine** 
 * **Programmatic Circuit Breaker:** Protects downstream enterprise parsing layers by validating structured schemas via an algorithmic output gate, entirely preventing model hallucinations or corrupted data shapes from entering logs.
 
 ---
+
 ## 🔍 Deep-Dive System Architecture
-For a comprehensive breakdown of systemic controls, intentional design limits, 
-and framework compliance mapping (ISO 42001/NIST AI RMF), review our full 
-[System Card & Enclosure Specifications](about.txt).
+For a comprehensive breakdown of systemic controls, intentional design limits, and framework compliance mapping (ISO 42001/NIST AI RMF), review our full [System Card & Enclosure Specifications](about.txt).
