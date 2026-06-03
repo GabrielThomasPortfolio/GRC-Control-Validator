@@ -40,13 +40,10 @@ For a comprehensive breakdown of systemic controls, intentional design limits, a
 Validate this implementation locally on your machine by setting up a clean, isolated environment:
 
 1. Clone the Project & Navigate Inside
-
-Bash
 git clone [https://github.com/YOUR_GITHUB_USERNAME/POLICY-EVALUATION-ENGINE.git](https://github.com/YOUR_GITHUB_USERNAME/POLICY-EVALUATION-ENGINE.git)
 cd POLICY-EVALUATION-ENGINE
-2. Provision and Activate a Virtual Environment
 
-Bash
+2. Provision and Activate a Virtual Environment
 # Create the environment sandbox
 python -m venv venv
 
@@ -56,12 +53,10 @@ source venv/bin/activate
 # Activate on Windows PowerShell:
 Set-ExecutionPolicy RemoteSigned -Scope Process
 .\venv\Scripts\Activate.ps1
+
 3. Install Dependencies
-
-Bash
 pip install -r requirements.txt
-4. Launch the Local Web Dashboard
 
-Bash
+4. Launch the Local Web Dashboard
 python -m streamlit run app.py
 Open your browser to http://localhost:8501 to view the interactive framework interface.
