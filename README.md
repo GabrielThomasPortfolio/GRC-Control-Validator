@@ -6,6 +6,12 @@
 [![Python 3.14+](https://img.shields.io/badge/python-3.14%2B-blue.svg)](https://www.python.org/) •
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+Copyright (c) 2026 Gabriel Thomas
+
+Permission is hereby granted…
+
+Attribution is required for any reuse, modification, or redistribution.
+
 >  **Live Portfolio Showcase:** [🚀 Click here to launch the live interactive Web Dashboard](https://policy-evaluation-engine-gabrielthomas.streamlit.app/)
 
 ---
@@ -60,3 +66,8 @@ pip install -r requirements.txt
 4. Launch the Local Web Dashboard
 python -m streamlit run app.py
 Open your browser to http://localhost:8501 to view the interactive framework interface.
+
+Provenance & Authorship  
+This project, including its architecture, system card, RAG mappings, and deterministic evaluation pipeline, was designed and implemented by Gabriel Thomas as part of a professional AI governance portfolio.
+
+If you reference or build upon this work, please provide attribution.
