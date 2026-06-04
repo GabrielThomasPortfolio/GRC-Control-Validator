@@ -100,11 +100,9 @@ def execute_secure_llm_call(prompt_package: Dict[str, str], retrieved_control: D
     """
     TRANSITIONED LIVE ENGINE CONNECTION
     Establishes an official OpenAI client orchestration loop with fallback logic.
-    Supports local execution via Ollama or custom enterprise cloud pipelines via env variables.
     """
-    # Environment variables drive the target execution endpoint natively
     api_key = os.getenv("OPENAI_API_KEY", "mock-simulation-key-active")
-    base_url = os.getenv("OPENAI_BASE_URL", None) # Set to http://localhost:11434/v1 for local Ollama
+    base_url = os.getenv("OPENAI_BASE_URL", None)
     model_name = os.getenv("COMPLIANCE_MODEL_NAME", "gpt-4o-mini")
 
     enclosed_prompt = (
@@ -114,7 +112,6 @@ def execute_secure_llm_call(prompt_package: Dict[str, str], retrieved_control: D
         f"<policy_context>\n{prompt_package['untrusted_user_policy']}\n</policy_context>\n"
     )
 
-    # SECURE DETOUR: If no active key environment setup is detected, use the safe mock-deterministic evaluation pipeline
     if api_key == "mock-simulation-key-active" and not base_url:
         return simulate_deterministic_fallback(prompt_package, retrieved_control)
 
@@ -127,14 +124,19 @@ def execute_secure_llm_call(prompt_package: Dict[str, str], retrieved_control: D
                 {"role": "system", "content": SYSTEM_PROMPT_TEMPLATE},
                 {"role": "user", "content": enclosed_prompt}
             ],
-            temperature=0.0, # Forces highly deterministic compliance outputs
+            temperature=0.0,
             response_format={"type": "json_object"}
         )
         
-        raw_output = response.choices[0].message.content
+        raw_output = response.choices[0].message.content.strip()
+        
+        # PRE-PROCESSING: Strip markdown blocks before parsing so json.loads doesn't crash
+        if raw_output.startswith("`" * 3):
+            pattern = r"^" + "`"*3 + r"(?:json)?\s*|\s*" + "`"*3 + r"$"
+            raw_output = re.sub(pattern, "", raw_output, flags=re.IGNORECASE).strip()
+            
         return json.loads(raw_output)
     except Exception as e:
-        # Graceful operational degradation reporting
         return {
             "error_state": True,
             "details": f"Live runtime connection exception hit: {str(e)}"
@@ -156,7 +158,6 @@ def simulate_deterministic_fallback(prompt_package: Dict[str, str], retrieved_co
         status = "NON-COMPLIANT"
         finding = "Gaps discovered against targeted monitoring metrics."
 
-    # Adversarial Injection testing harness simulation interceptor
     if "override" in policy_lower and "ignore" in policy_lower:
         return {"malformed_jailbreak_payload": "triggered"}
 
@@ -173,12 +174,32 @@ def simulate_deterministic_fallback(prompt_package: Dict[str, str], retrieved_co
 def verify_output_gate(model_response: Any) -> Optional[ComplianceAuditFinding]:
     """
     OUTPUT VERIFICATION GATE (CIRCUIT BREAKER)
-    Leverages Pydantic validation to enforce schema metrics before inclusion.
+    Hardened to handle raw string inputs and common structural anomalies 
+    before applying strict Pydantic enforcement.
     """
+    if isinstance(model_response, str):
+        cleaned_str = model_response.strip()
+        if cleaned_str.startswith("`" * 3):
+            pattern = r"^" + "`"*3 + r"(?:json)?\s*|\s*" + "`"*3 + r"$"
+            cleaned_str = re.sub(pattern, "", cleaned_str, flags=re.IGNORECASE).strip()
+        try:
+            model_response = json.loads(cleaned_str)
+        except Exception:
+            return None
+
     if not isinstance(model_response, dict):
         return None
+
+    if "verification_checklist" in model_response:
+        if isinstance(model_response["verification_checklist"], str):
+            model_response["verification_checklist"] = [model_response["verification_checklist"]]
+        elif model_response["verification_checklist"] is None:
+            model_response["verification_checklist"] = []
+
+    if "compliance_status" in model_response and isinstance(model_response["compliance_status"], str):
+        model_response["compliance_status"] = model_response["compliance_status"].upper()
+
     try:
-        # Enforce type definitions and key mapping automatically via Pydantic parsing
         validated_finding = ComplianceAuditFinding(**model_response)
         return validated_finding
     except (ValidationError, TypeError):
@@ -249,9 +270,9 @@ def generate_markdown_executive_summary(final_report: Dict[str, Any]) -> str:
             
         if item.get("remediation_directives") and item.get("compliance_status") != "COMPLIANT":
             md.append("#### 🛠️ Strategic Remediation Plan")
-            md.append("```text")
+            md.append("`" * 3 + "text")
             md.append(item.get("remediation_directives", "").strip())
-            md.append("```\n")
+            md.append("`" * 3 + "\n")
             
         md.append("---")
         
