@@ -1,0 +1,5 @@
+{"timestamp": "2026-06-02 15:24:43", "track": "Statutory_Legal", "controls_checked": 6, "violations_flagged": 0}
+{"timestamp": "2026-06-02 15:27:59", "track": "Security_Baseline", "controls_checked": 14, "violations_flagged": 0}
+{"timestamp": "2026-06-02 15:50:39", "track": "Security_Baseline", "controls_checked": 4, "violations_flagged": 0}
+{"timestamp": "2026-06-02 15:53:02", "track": "Security_Baseline", "controls_checked": 4, "violations_flagged": 0}
+{"timestamp": "2026-06-02 15:55:54", "track": "Statutory_Legal", "controls_checked": 2, "security_gate_violations": 2}

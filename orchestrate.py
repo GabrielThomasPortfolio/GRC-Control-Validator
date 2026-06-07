@@ -18,8 +18,8 @@ You must strictly output a valid JSON block matching the requested schema keys e
 REQUIRED JSON OUTPUT SCHEMA:
 {
     "audit_track_applied": "String (Exact match of the Active Audit Track provided in the prompt)",
-    "citation_id": "String (The internal reference ID, e.g., A.2.1)",
-    "governance_standards": "String (Framework alignments, e.g., ISO // NIST)",
+    "citation_id": "String (The internal reference ID, e.g., A.2.1, or Article 5 for Legal Statutes)",
+    "governance_standards": "String (Framework alignments, e.g., ISO // NIST, or Legal Statutes like GDPR // EU AI Act depending on the Active Audit Track)",
     "compliance_status": "String (Must strictly equal 'COMPLIANT' or 'NON-COMPLIANT')",
     "verification_checklist": ["Array of Strings (The specific verifications applied)"],
     "detailed_finding": "String (Granular objective engineering analysis)",

@@ -34,7 +34,7 @@ chosen_track = st.sidebar.selectbox(
 DATABASE_ROUTING_MAP = {
     "Operational_Security": "rag_ready_iso_27001_to_nist_800_53.jsonl",
     "AI_Governance": "rag_ready_iso_42001_to_nist_ecosystem.jsonl",
-    "Statutory_Legal": "rag_ready_iso_42001_to_nist_ecosystem.jsonl", 
+    "Statutory_Legal": "rag_ready_statutory_laws.jsonl", # <-- UPDATED PATH
     "Privacy_Default": "rag_ready_iso_27001_to_nist_800_53.jsonl" 
 }
 
@@ -44,10 +44,6 @@ kb_path = DATABASE_ROUTING_MAP.get(chosen_track, "rag_ready_iso_27001_to_nist_80
 # Display a read-only confirmation to the user of what database is active
 st.sidebar.markdown("---")
 st.sidebar.caption(f"🔒 **Active Database Binding:**\n`{kb_path}`")
-
-st.title("🛡️ Deterministic GRC Control Validator")
-st.markdown("### Automated Regulatory Mapping & Architecture Alignment Engine")
-st.markdown("---")
 
 st.title("🛡️ Deterministic GRC Control Validator")
 st.markdown("### Automated Regulatory Mapping & Architecture Alignment Engine")
