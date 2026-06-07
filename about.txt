@@ -1,56 +1,78 @@
 ================================================================================
-AI GOVERNANCE & POLICY EVALUATION ENGINE
+SYSTEM CARD & ARCHITECTURAL SPECIFICATION
 ================================================================================
+System Name: Deterministic GRC Control Validator
+Document Type: System Card / Model Enclosure Card
+Target Audience: CISOs, Security Architects, Compliance Auditors, Engineering Leads
+Project Focus: Security Architecture, System Security Plan (SSP) Validation, IT Governance
+System Architecture: Hybrid RAG Pipeline with Active Circuit-Breaker Guardrails
 
-OVERVIEW
-This application is an Enterprise GRC Infrastructure Tool designed to bridge the 
-gap between natural-language corporate policies and structured, deterministic 
-regulatory mapping. It automates the evaluation of untrusted policy documents 
-against global risk management frameworks (ISO 42001, ISO 27001) and statutory 
-legislation (EU AI Act, Brazilian AI Act PL 2338, NIST AI RMF).
-
-By leveraging a secure, multi-layered compliance pipeline, the engine drops 
-evaluation timelines from weeks to seconds while maintaining strict data 
-privacy and zero-trust execution boundaries.
-
+1. SYSTEM OVERVIEW
 --------------------------------------------------------------------------------
-CORE ARCHITECTURE & TECHNICAL SPECIFICATIONS
+The Deterministic GRC Control Validator is an enterprise-grade, privacy-preserving 
+architecture designed to evaluate technical engineering standards, System Security 
+Plans (SSPs), and baseline configurations against codified regulatory frameworks 
+(ISO 27001, ISO 42001, NIST 800-53, EU AI Act).
+
+Operating under a strict defense-in-depth security paradigm, the engine demonstrates 
+how to leverage Large Language Models (LLMs) for complex technical gap analysis 
+without exposing the application to prompt injection breakouts, data exfiltration, 
+or Local File Inclusion (LFI) vulnerabilities.
+
+2. CORE ARCHITECTURE & SECURE-BY-DESIGN SPECIFICATIONS
 --------------------------------------------------------------------------------
+[A] Zero-Trust UI & Data Routing (app.py)
+  - Path Traversal Fencing: Telemetry log paths are strictly hardcoded in the 
+    backend, completely removing Arbitrary File Write vulnerabilities.
+  - Intelligent Database Routing: User UI intent is mapped to immutable backend 
+    constants. The frontend has zero direct manipulation access to the underlying 
+    file system or vector paths, preventing LFI exploitation.
 
-1. ADVERSARIAL INPUT FIREWALL & DATA SANITIZATION (sanitize.py)
-   - Prompt Injection Defense: Implements a regex-based firewall that actively 
-     scans for and intercepts malicious structural overrides (e.g., "ignore 
-     previous instructions") before they reach the LLM execution context.
-   - PII & Proprietary Masking: Automatically detects and redacts personal 
-     identifiable information (PII), network paths, and proprietary corporate 
-     markers prior to runtime processing to prevent data leakage.
+[B] Adversarial Input Firewall & Data Sanitization (sanitize.py)
+  - Prompt Injection Defense: Implements a regex-based firewall that actively 
+    scans for and intercepts malicious structural overrides (e.g., "ignore 
+    previous instructions") before they reach the LLM execution context.
+  - PII & Proprietary Masking: Automatically detects and redacts personal 
+    identifiable information (PII) and proprietary corporate markers.
 
-2. SECURE ORCHESTRATION & HYBRID EXECUTION (orchestrate.py)
-   - XML Context Fencing: Wraps untrusted policy input inside hard XML tags 
-     (<policy_context>) to strictly separate system-level compliance instructions 
-     from user-provided data.
-   - Live API & Local Fallback: Integrates the official OpenAI SDK for live 
-     evaluation (e.g., gpt-4o-mini), with a seamless architectural fallback to 
-     a local deterministic simulation engine if cloud endpoints are isolated.
+[C] Secure Orchestration & Context Fencing (orchestrate.py)
+  - XML Context Fencing: Wraps untrusted user standards inside hard XML tags 
+    (<document_context>) to strictly separate system-level compliance instructions 
+    from user-provided data.
 
-3. DETERMINISTIC OUTPUT GATE (Circuit Breaker)
-   - Pydantic Schema Validation: Replaces standard LLM text generation with a 
-     strict, type-enforced schema pipeline. The circuit breaker drops any 
-     response that hallucinates data, omits mandatory compliance keys, or breaks 
-     formatting, ensuring downstream enterprise reporting systems remain uncorrupted.
+[D] Deterministic Output Gate / Circuit Breaker
+  - Pydantic Schema Validation: Replaces standard LLM text generation with a 
+    strict, type-enforced schema pipeline. A custom healing layer patches minor 
+    LLM drift, while the circuit breaker actively drops any response that 
+    hallucinates data or misses mandatory enterprise reporting keys.
 
-4. DYNAMIC REGULATORY OVERLAY ENGINE (transform.py)
-   - Multi-Framework Crosswalking: Dynamically maps technical engineering controls 
-     (like NIST 800-53) directly to overarching statutory laws (e.g., GDPR Article 35, 
-     Colorado AI Act).
-   - Weighted Semantic Router: Routes policy text to the correct compliance 
-     tracks using a custom scoring matrix based on primary framework identifiers, 
-     semantic hooks, and context token intersection.
+[E] Dynamic Regulatory Overlay Engine (transform.py)
+  - Multi-Framework Crosswalking: Dynamically maps technical engineering controls 
+    (like NIST 800-53) directly to overarching statutory laws (e.g., GDPR, EU AI Act).
+  - Weighted Semantic Router: Routes technical text to the correct compliance tracks 
+    using a custom scoring matrix based on primary framework identifiers, semantic 
+    hooks, and context token intersection.
 
+3. INTENDED OPERATIONAL USE CASES
 --------------------------------------------------------------------------------
-TECH STACK
+The system is explicitly engineered for the following operational workflows:
+* System Security Plan (SSP) Validation: Rapid parsing of technical documentation 
+  to discover control deficiencies prior to formal SOC 2 or ISO certification audits.
+* DevSecOps Configuration Auditing: Acting as a compliance linter to ensure written 
+  infrastructure baselines match regulatory expectations.
+* AI Architecture Alignment: Cross-referencing ML engineering specifications against 
+  emerging legal requirements (ISO 42001, Brazilian AI Act).
+
+*Note: This engine evaluates quantifiable engineering standards. High-level corporate 
+policies lacking technical parameters will intentionally generate low compliance 
+scores to highlight governance abstraction gaps.*
+
+================================================================================
+DEVELOPMENT METADATA
 --------------------------------------------------------------------------------
-- Frontend: Streamlit (Python)
-- Validation: Pydantic V2
-- AI/ML Orchestration: OpenAI Python SDK (Compatible with local Ollama endpoints)
-- Data Processing: JSONL Knowledge Bases, RegEx
+Architecture Tier : Professional Portfolio Reference Implementation
+Execution Design  : Streamlit Web UI Shell + Deterministic Backend Orchestrator
+Environment       : Python 3.10+ Isolate Sandbox Environment
+Primary Libraries : Pydantic V2, OpenAI Python SDK, Streamlit
+Safety Status     : Verified Safe Execution Context
+================================================================================

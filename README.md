@@ -1,140 +1,71 @@
-================================================================================
-SYSTEM CARD & ARCHITECTURAL SPECIFICATION: POLICY EVALUATION ENGINE
-================================================================================
-Document Type: System Card / Model Enclosure Card
-Target Audience: Compliance Reviewers, Cybersecurity Auditors, Portfolio Evaluators
-Project Focus: AI Governance, Information Security Risk Management, Application Security
-System Architecture: Local-First RAG Pipeline with Active Circuit-Breaker Guardrails
+# 🛡️ Deterministic GRC Control Validator
 
-1. SYSTEM OVERVIEW
---------------------------------------------------------------------------------
-The Deterministic AI Policy Evaluation & Compliance Engine is an enterprise-grade,
-privacy-preserving architecture designed to evaluate untrusted, draft corporate 
-policies against codified regulatory and governance standards. 
+[![Live Application](https://img.shields.io/badge/Launch-Live_Application-success?style=for-the-badge&logo=streamlit)](https://grc-control-validator-gabrielthomas.streamlit.app/)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: Proprietary](https://img.shields.io/badge/License-Proprietary-red.svg)](#license--intellectual-property)
 
-Operating under a defense-in-depth security paradigm, the engine demonstrates how to
-leverage Large Language Models (LLMs) for complex compliance mapping without 
-exposing the system to prompt injection breakouts, data exfiltration, or schema 
-corruption. It anchors model reasoning boundaries using hard XML isolation tags 
-and deterministic programmatic output gates.
+**An enterprise-grade, privacy-preserving architecture designed to deterministically evaluate technical engineering standards, System Security Plans (SSPs), and baseline configurations against codified regulatory frameworks.**
 
-2. INTENDED USE CASES
---------------------------------------------------------------------------------
-The system is explicitly engineered for the following operational workflows:
-* Automated Pre-Audit Gap Analysis: Rapid parsing of draft policies to discover 
-  structural deficiencies and alignment gaps against targeted compliance frameworks 
-  prior to formal internal or external audits.
-* Cross-Framework Mapping (ISO/NIST Topology): Translating operational corporate 
-  directives into mapped regulatory controls across multiple standards simultaneously 
-  (e.g., aligning an internal logging policy to both ISO 42001 and NIST frameworks).
-* Privacy-Preserving Governance Assessment: Local-first evaluation of corporate 
-  intellectual property or security parameters, completely eliminating data leak 
-  vectors to untrusted third-party cloud environments.
-* Continuous Telemetry Monitoring: Streamlining defensive compliance monitoring 
-  for Information Security and IT Risk Management departments through automated 
-  telemetry capture and repeatable assurance pipelines.
+---
 
-3. SYSTEM MISUSE AND OUT-OF-SCOPE VARIATIONS
---------------------------------------------------------------------------------
-To maintain governance integrity, the system must not be deployed under the 
-following conditions:
-* Autonomous Policy Enforcement: The engine is an assistive diagnostic assurance 
-  tool. It must never bypass "Human-in-the-Loop" verification for critical business 
-  or legal risk sign-offs.
-* Automated Legal/Certification Binding: This tool does not issue legal certifications
-  or formal regulatory sign-offs. Findings should not replace certified external audits.
-* Dynamic Unvetted Tool-Calling: Allowing the untrusted input text to influence 
-  downstream live execution environments, system privileges, or live system APIs.
-* Exposure of Raw Core Systems: Deploying the pipeline without the programmatic 
-  Output Verification Gate, which exposes downstream parsing applications to injection 
-  payloads or malformed visual structures.
+## 🎯 Executive Summary
+For Security Architects, CISOs, and Compliance Engineering Leads, bridging the gap between written technical standards and evolving regulatory frameworks (like ISO 27001, ISO 42001, or NIST 800-53) is traditionally a manual, error-prone process. 
 
-4. APPLICABLE CONTROLS & GOVERNANCE FRAMEWORKS
---------------------------------------------------------------------------------
-The system's taxonomy and rule configurations directly map to the following global 
-governance and assurance architectures:
-* ISO/IEC 42001:2023 (Artificial Intelligence Management System - AIMS): 
-  Specifically addresses controls surrounding AI policy development, system 
-  trustworthiness, continuous audit logging, and data governance boundaries.
-* ISO/IEC 27001:2022 (Information Security Management System - ISMS): 
-  Aligns with control structures governing threat tracking, infrastructure logging, 
-  and information security continuity.
-* NIST AI Risk Management Framework (AI RMF 1.0):
-  Directly operationalizes the core functions: GOVERN, MAP, MEASURE, and MANAGE, 
-  by establishing strict behavioral boundaries for the reasoning agent.
+This engine automates that gap analysis. By utilizing a hybrid Retrieval-Augmented Generation (RAG) pipeline paired with strict deterministic output gates, the application ingests untrusted corporate standards, routes them semantically to the correct compliance baseline, and generates a granular, objective gap analysis—without risking prompt injection, data exfiltration, or LLM hallucinations.
 
-5. INTEGRATED DEFENSIVE FEATURES & ARCHITECTURAL CONTROLS
---------------------------------------------------------------------------------
-The system integrates five distinct layers of technical and security controls:
+---
 
-[A] Context Enclosure Boundary (Input Isolation)
-    Untrusted policy data is completely neutralized upon ingestion by being 
-    enclosed within strict, non-bypassable XML context blocks (<policy_context>). 
-    A immutable, deterministic System Prompt hardens the LLM's behavioral boundary, 
-    instructing it to treat all enclosed text purely as informational text to analyze, 
-    thereby defeating prompt injection, social engineering, and jailbreak payloads.
+## 🏗️ Core Architectural Value
+This application is built with a "Secure-by-Design" and "Zero-Trust" mindset, demonstrating production-ready engineering suitable for Fortune 500 risk environments.
 
-[B] Local Semantic Multi-Track Router
-    Rather than broadcasting the full user policy across an entire external database 
-    and inflating token overhead, a local router filters and directs the payload 
-    to specific compliance tracks (e.g., AI_Governance, Privacy_Default). This 
-    enforces a "least-privilege" data access design for context assembly.
+* **Deterministic Circuit Breakers:** Eliminates LLM hallucination risk. Responses are passed through strict Pydantic schema validation; malformed JSON or structurally invalid outputs are instantly dropped before reaching downstream matrices.
+* **Adversarial Input Firewall:** Employs regex-based active scanning to intercept and neutralize prompt injection attempts (e.g., "ignore previous instructions") from untrusted user uploads.
+* **Zero-Trust UI & Data Routing:** Eliminates Local File Inclusion (LFI) and Path Traversal vulnerabilities by mapping user intent to immutable backend constants, completely abstracting the file system from the frontend.
+* **Token-Weighted Semantic Routing:** Replaces rigid keyword matching with an advanced intersection matrix to dynamically route technical configurations to overlapping statutory laws (e.g., mapping NIST technical controls to EU AI Act requirements).
 
-[C] Output Verification Gate / Circuit Breaker
-    The final programmatic defense line. Before any model response is committed to 
-    the system logs or displayed to an executive user, the `verify_output_gate` 
-    intercepts the object. It evaluates the structure against mandatory schema keys 
-    (audit_track_applied, citation_id, compliance_status, detailed_finding). If a 
-    breakout attempt or malformed structural variant is detected, the circuit breaker 
-    trippers, the payload is completely discarded, and an anomaly alert is registered.
+> 🔍 **Deep Technical Dive:** For a comprehensive breakdown of the threat-modeling, context fencing, and regulatory cross-walking methodologies, please review the formal [System & Architecture Card (about.txt)](about.txt).
 
-[D] Append-Only Telemetry Streaming
-    Continuous deployment security metrics are maintained in an immutable, 
-    append-only JSONL log (`agent_monitoring_telemetry.jsonl`). It streams real-time 
-    data on control checks completed, selected paths, and security gate violations, 
-    providing clear forensic history for system behavior.
+---
 
-[E] Dual-Stream Executive Reporting Engine
-    Decoupled processing layers allow the engine to simultaneously generate a highly 
-    structured JSON ledger for programmatic interoperability and an enterprise-ready 
-    Markdown Executive Summary. The executive layer translates compliance metrics 
-    into visual ASCII dashboards, progress indicators, and actionable remediation logs.
+## 🚀 Run the Application Locally
 
-6. KNOWN SYSTEM LIMITATIONS & ARCHITECTURAL EVOLUTION
---------------------------------------------------------------------------------
-To facilitate friction-free, local testing and cost-free public portfolio 
-review, this implementation utilizes a deterministic test harness 
-(`simulate_secure_llm_call`) as a simulated execution environment.
+For engineers and reviewers who wish to run the evaluation engine in a local, isolated sandbox environment, follow these steps:
 
-[A] The Local Test Harness Boundary
-    The current local simulation defaults to an optimistic alignment posture 
-    unless explicit tracking keywords (e.g., infrastructural log loops) are 
-    violated. Consequently, scanning comprehensive framework policies (such as 
-    traditional enterprise IT charters) may yield false positives across 
-    highly specialized tracks like AI_Governance, as the mock parser relies 
-    on predictable string matching rather than contextual linguistic comprehension.
+### 1. Prerequisites
+* Python 3.10 or higher
+* Git
 
-[B] Production Migration Path (The Cognitive Upgrade)
-    In a live enterprise environment, the system replaces the mock simulation 
-    with a live API calling structure (e.g., Google Gemini or OpenAI) using 
-    Strict Structured Outputs (JSON Schema Enforcements). 
-    
-    The operational workflow scales as follows:
-    1. The Local Router dynamically isolates the policy payload and fetches 
-       the precise regulatory compliance JSONL rows.
-    2. The live LLM digests the context-enclosed user policy inside the secure 
-       XML wrappers.
-    3. The model programmatically cross-references the text against the 
-       actual `evaluation_checklist` arrays, logging genuine, context-aware 
-       gap findings.
-    4. The model returns its final response structured exactly to the required 
-       schema keys, ensuring it either sails through the verification circuit 
-       breaker or triggers an anomaly event.
-================================================================================
-DEVELOPMENT METADATA
---------------------------------------------------------------------------------
-Architecture Tier : Professional Portfolio Reference Implementation
-Execution Design  : Streamlit Web UI Shell + Deterministic Backend Orchestrator
-Environment       : Python 3.14+ Isolate Sandbox Environment
-Safety Status     : Verified Safe Local Execution Context
-================================================================================
+### 2. Clone the Repository
+
+git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/GabrielThomasPortfolio/GRC-Control-Validator/)
+cd your-repo-name
+3. Install Dependencies
+It is recommended to use a virtual environment.
+
+
+python -m venv venv
+source venv/bin/activate  # On Windows use: venv\Scripts\activate
+pip install -r requirements.txt
+4. Environment Configuration
+This application utilizes OpenAI's models for semantic reasoning. You must provide an active API key via a secure .env file.
+
+Create a file named .env in the root directory.
+
+Add the following variables:
+
+Code snippet
+OPENAI_API_KEY="sk-your-actual-api-key"
+COMPLIANCE_MODEL_NAME="gpt-4o-mini"
+(Note: The .env file is explicitly included in the .gitignore to prevent secret leakage.)
+
+5. Launch the Engine
+
+streamlit run app.py
+The UI will automatically deploy to http://localhost:8501.
+
+⚖️ License & Intellectual Property
+All Rights Reserved.
+
+This repository and its contents, including but not limited to the source code, architecture design, semantic routing logic, and system prompt structures, are the intellectual property of the author.
+
+This code is provided publicly strictly for portfolio review, technical demonstration, and hiring evaluation purposes. You may not copy, modify, distribute, sell, or use this code for commercial purposes, internal corporate compliance auditing, or deployment within any organization without express written consent from the author.
