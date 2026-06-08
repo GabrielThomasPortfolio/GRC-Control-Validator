@@ -57,10 +57,49 @@ executive policy statements (devoid of specific engineering parameters) will
 typically result in low compliance scores; this is a feature intended to 
 expose governance abstraction gaps.
 
+===============================================================================
+ARCHITECTURAL MODEL
+===============================================================================
+Nothing follows it. For a file that opens with enterprise-grade language about zero-trust pipelines and circuit breakers, an empty section is jarring. Replace it with this:
+
+Code
+
+
+Copy
 ================================================================================
 ARCHITECTURAL MODEL
 ================================================================================
 
+INPUT LAYER
+  [.TXT / .PDF / .DOCX Upload]
+         │
+         ▼
+SANITIZATION FIREWALL  (sanitize.py → sanitize_text())
+  Prompt injection detection │ Adversarial pattern matching
+         │
+         ▼
+TEXT EXTRACTION & NORMALIZATION  (utils → extract_text_from_file())
+  Multi-format parsing │ Unified raw text output
+         │
+         ▼
+LEXICAL KEYWORD ROUTER  (orchestrate.py → local_keyword_router())
+  Token overlap scoring against RAG knowledge bases
+  Track assignment: Operational Security │ AI Governance │
+                    Statutory Legal │ Privacy Default
+         │
+         ▼
+LLM EVALUATION ENGINE  (orchestrate.py → execute_secure_llm_call())
+  gpt-4o-mini │ temperature=0.0 │ XML context fencing
+  JSON-only response enforcement
+         │
+         ▼
+OUTPUT GATE & PYDANTIC VALIDATOR  (orchestrate.py → verify_output_gate())
+  Schema enforcement │ Circuit breaker on invalid output
+         │
+         ▼
+EXECUTIVE REPORT + RAW JSON LEDGER  (app.py → Streamlit UI)
+  Compliance rate gauge │ Per-control finding matrix │
+  Remediation directives │ Telemetry logging
 
 ================================================================================
 DEVELOPMENT METADATA
@@ -68,3 +107,11 @@ DEVELOPMENT METADATA
 Framework Integrity: Production-grade Portfolio Reference Implementation
 Safety Protocols   : Verified (Zero-Trust Input/Output pipeline)
 Environment        : Python 3.10+ Sandbox
+
+================================================================================
+DEPLOYMENT REFERENCE
+================================================================================
+Live Streamlit Demo : https://grc-control-validator-gabrielthomas.streamlit.app
+GitHub Repository   : https://github.com/GabrielThomasPortfolio/GRC-Control-Validator
+Document Version    : 2.0  |  Last Updated: June 2026
+================================================================================
