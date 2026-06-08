@@ -1,5 +1,7 @@
 GRC Control Validator
 
+![CI](https://github.com/GabrielThomasPortfolio/GRC-Control-Validator/actions/workflows/ci.yml/badge.svg)
+
 A lightweight, deterministic engine for evaluating technical standards, SOPs, and system documentation against security and compliance requirements. Built to support real‑world GRC work where inputs are messy, untrusted, and need structured, defensible evaluation.
 
 What This Project Does
@@ -22,17 +24,41 @@ It reflects how GRC engineering actually works:
 Key Features
 * Deterministic evaluation pipeline
 * Input sanitization to prevent prompt injection
-* Semantic routing to match documentation to relevant controls
+* Lexical keyword routing that matches uploaded documentation to relevant controls across four compliance tracks
 * Guardrails to keep outputs grounded and defensible
 * Streamlit UI for quick testing and demos
 
 Tech Stack
-* Python
-* Streamlit
-* OpenAI (constrained, evaluation‑only usage)
+* Python 3.10+
+* Streamlit — UI and orchestration layer
+* OpenAI `gpt-4o-mini` at `temperature=0.0` — bounded, deterministic evaluation only
+* Pydantic v2 — strict output schema enforcement via `ComplianceAuditFinding`
+* pypdf + python-docx — multi-format document ingestion
+* Custom RAG knowledge bases (JSONL) — ISO 27001/NIST 800-53, ISO 42001, Statutory Laws
+* pytest — automated validation suite
 
 Live Demo
 https://grc-control-validator-gabrielthomas.streamlit.app
+
+## Setup
+
+```bash
+git clone https://github.com/GabrielThomasPortfolio/GRC-Control-Validator.git
+cd GRC-Control-Validator
+pip install -r requirements.txt
+```
+
+Create a `.env` file in the root:
+```
+OPENAI_API_KEY=sk-proj-your-key-here
+```
+
+Run the app:
+```bash
+streamlit run app.py
+```
+
+> **No API key?** Set `OPENAI_API_KEY=mock` in your `.env` to run in demo mode with simulated evaluations.
 
 What This Project Demonstrates
 This repo highlights my focus on:
