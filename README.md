@@ -41,4 +41,4 @@ This repo highlights my focus on:
 * Deterministic evaluation design
 * Practical automation for compliance and audit workflows
 
-It’s part of a broader effort to build tools that make governance work more scalable, consistent, and reliable.*
+It’s part of a broader effort to build tools that make governance work more scalable, consistent, and reliable.
