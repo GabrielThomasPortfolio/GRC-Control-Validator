@@ -3,3 +3,31 @@
 {"timestamp": "2026-06-02 15:50:39", "track": "Security_Baseline", "controls_checked": 4, "violations_flagged": 0}
 {"timestamp": "2026-06-02 15:53:02", "track": "Security_Baseline", "controls_checked": 4, "violations_flagged": 0}
 {"timestamp": "2026-06-02 15:55:54", "track": "Statutory_Legal", "controls_checked": 2, "security_gate_violations": 2}
+{"timestamp": "2026-06-08T08:10:18.327643", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:10:25.903204", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:10:31.695399", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:10:38.922292", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:10:45.745038", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:10:51.986745", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:10:59.104295", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:05.409010", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:11.115032", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:16.179590", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:21.643014", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:26.720821", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:31.943397", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:38.538319", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:43.863360", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:50.665002", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:11:56.263387", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:01.799856", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:06.785863", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:12.981620", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:18.949500", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:23.879932", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:29.553835", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:36.618047", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:41.911308", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:48.733840", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:12:54.479886", "track_evaluated": "Operational_Security", "anomalies_detected": false}
+{"timestamp": "2026-06-08T08:13:00.629662", "track_evaluated": "Operational_Security", "anomalies_detected": false}

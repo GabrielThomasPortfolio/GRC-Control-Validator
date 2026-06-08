@@ -5,6 +5,8 @@ from datetime import datetime
 from typing import List, Dict, Any, Optional
 from pydantic import BaseModel, Field, ValidationError, field_validator
 from openai import OpenAI
+import pypdf
+from docx import Document
 
 # --- PRODUCTION-GRADE SYSTEM ENCLOSURE TEMPLATE ---
 SYSTEM_PROMPT_TEMPLATE = """
@@ -43,6 +45,22 @@ class ComplianceAuditFinding(BaseModel):
         if v.upper() not in ["COMPLIANT", "NON-COMPLIANT"]:
             raise ValueError("compliance_status must be either COMPLIANT or NON-COMPLIANT")
         return v.upper()
+
+def extract_text_from_file(uploaded_file):
+    file_ext = uploaded_file.name.split('.')[-1].lower()
+    
+    if file_ext == "txt":
+        return uploaded_file.read().decode("utf-8")
+    
+    elif file_ext == "pdf":
+        reader = pypdf.PdfReader(uploaded_file)
+        return "\n".join([page.extract_text() for page in reader.pages])
+    
+    elif file_ext == "docx":
+        doc = Document(uploaded_file)
+        return "\n".join([para.text for para in doc.paragraphs])
+    
+    return ""
 
 def load_rag_knowledge_base(jsonl_file: str) -> List[Dict[str, Any]]:
     kb = []

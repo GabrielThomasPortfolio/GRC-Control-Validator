@@ -174,7 +174,8 @@ def transform_csv_to_jsonl(input_csv, output_jsonl, framework_type):
                 semantic_hooks = generate_keywords(domain, iso_name, iso_summary)
 
                 json_package = {
-                    "id": f"RAG_{primary_std}_{iso_id.replace('.', '_')}",
+                    # Added str() wrapper here to prevent NoneType attribute errors
+                    "id": f"RAG_{primary_std}_{str(iso_id).replace('.', '_')}",
                     "text_to_embed": text_to_embed,
                     "metadata": {
                         "framework_family": family,
