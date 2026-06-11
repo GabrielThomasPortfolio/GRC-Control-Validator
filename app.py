@@ -110,6 +110,13 @@ if uploaded_file is not None:
                 prompt_payload = {"track": chosen_track, "untrusted_document": policy_content}
                 
                 raw_response = execute_secure_llm_call(prompt_payload, control)
+                
+                # ✅ NEW SECURITY GUARD: Intercept API/Network faults before checking structure
+                if isinstance(raw_response, dict) and raw_response.get("error_state"):
+                    st.error(f"❌ OpenAI API Execution Failure: {raw_response.get('details')}")
+                    st.info("💡 **GRC Security Note:** If your API key was recently exposed in a code block or commit, OpenAI's automated perimeter defense bots may have instantly revoked it. Please check your OpenAI API dashboard and rotate your credentials.")
+                    st.stop()
+
                 validated_finding = verify_output_gate(raw_response)
 
                 # SPRINT 4 FIX (Bug 2): Bulletproof Output Gate Null-Check
