@@ -146,14 +146,13 @@ def simulate_deterministic_fallback(prompt_package, control):
     Mock mode execution for demo environments without an active API key.
     Evaluates based on basic presence of the control ID and keyword mapping.
     """
-    # SPRINT 4 FIX (Bug 1): Safe dictionary extraction to prevent KeyErrors
+    # Safe dictionary extraction
     user_doc = prompt_package.get('untrusted_document', prompt_package.get('untrusted_user_policy', ''))
     
     control_id = control.get('metadata', {}).get('iso_id', 'Unknown')
     control_name = control.get('metadata', {}).get('iso_name', 'Unknown')
 
-    # SPRINT 4 FIX (Bug 3): Meaningful evaluation fallback logic
-    # Checks for either the ID or the semantic control name
+    # Meaningful evaluation fallback logic
     if control_id.lower() in user_doc.lower() or control_name.lower() in user_doc.lower():
         status = "COMPLIANT"
         finding = f"Mock evaluation: System verified presence of {control_id} or related domain keywords."
@@ -162,9 +161,11 @@ def simulate_deterministic_fallback(prompt_package, control):
         finding = f"Mock evaluation: System could not detect {control_id} parameters in the document."
 
     return {
+        "audit_track_applied": prompt_package.get('track', 'Unknown'),  # ✅ FIX: Satisfy required Pydantic field
         "citation_id": control_id,
         "governance_standards": "System Mock Standard",
         "compliance_status": status,
+        "verification_checklist": ["Automated string presence check executed"],  # ✅ Add fallback checklist array
         "detailed_finding": finding,
         "remediation_directives": f"Ensure document explicitly references {control_id} ({control_name})."
     }
